@@ -61,7 +61,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             position: relative;
-            overflow: hidden;
             z-index: 100;
         }
 
@@ -82,35 +81,12 @@
         }
 
         .header h1 {
-            font-size: 4rem;
-            background: linear-gradient(45deg, #ffd700, #ffed4e, #fff9c4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 3.8rem;
+            color: #ffd700;
             margin-bottom: 15px;
             text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
             font-weight: 700;
             letter-spacing: 2px;
-            position: relative;
-        }
-
-        .header h1::before {
-            content: '🏓';
-            position: absolute;
-            left: -50px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            opacity: 0.8;
-        }
-
-        .header h1::after {
-            content: '🏓';
-            position: absolute;
-            right: -50px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            opacity: 0.8;
         }
 
         .header p {
@@ -163,8 +139,10 @@
             padding: 35px;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            min-height: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 100;
         }
 
         .section-title {
@@ -196,9 +174,8 @@
             position: relative;
             gap: 60px;
             padding: 0 40px;
+            flex-wrap: wrap;
         }
-
-
 
         .round {
             display: flex;
@@ -209,6 +186,7 @@
             min-height: 400px;
             flex: 1;
             gap: 0;
+            min-width: 250px;
         }
 
         /* 四分之一决赛轮 - 对称排列: 上半区1, 下半区1, 上半区2, 下半区2 */
@@ -641,29 +619,35 @@
             box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
         }
 
+        .click-hint-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            width: 100%;
+        }
+
         .click-hint {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             color: #ffd700;
             font-size: 1rem;
             font-weight: 600;
             animation: flash 2s infinite;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 10px;
             border: 2px solid rgba(255, 215, 0, 0.5);
             box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
             backdrop-filter: blur(10px);
-            width: 160px;
-            height: 120px;
+            width: auto;
+            min-width: 180px;
+            height: auto;
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            line-height: 1.4;
-            z-index: 150;
+            line-height: 1.2;
+            white-space: nowrap;
         }
 
         @keyframes flash {
@@ -754,31 +738,245 @@
             width: 2px;
         }
 
-        @media (max-width: 768px) {
-            .bracket-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .round {
-                min-height: auto;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            
-            .match {
-                width: 180px;
-                margin: 10px;
-            }
-        }
+        /* 响应式设计 - 适配不同设备 */
+        
+        /* 平板设备 (768px - 1024px) */
+         @media (max-width: 1024px) {
+             .container {
+                 padding: 20px;
+             }
+             
+             .header h1 {
+                 font-size: 3rem;
+             }
+             
+             .bracket-container {
+                 gap: 40px;
+                 padding: 0 20px;
+                 flex-wrap: wrap;
+                 justify-content: space-around;
+             }
+             
+             .round {
+                 min-width: 220px;
+                 min-height: 350px;
+                 margin-bottom: 30px;
+             }
+             
+             .match {
+                 width: 200px;
+                 padding: 15px;
+             }
+             
+             .player {
+                 font-size: 1.1rem;
+                 padding: 10px;
+             }
+             
+             .section-title {
+                 font-size: 1.8rem;
+             }
+         }
+        
+        /* 大屏手机 (576px - 768px) */
+         @media (max-width: 768px) {
+             .container {
+                 padding: 15px;
+             }
+             
+             .header {
+                 padding: 30px 0;
+             }
+             
+             .header h1 {
+                 font-size: 2.5rem;
+             }
+             
+             .bracket-container {
+                 flex-direction: column;
+                 gap: 30px;
+                 padding: 0 15px;
+                 min-height: auto;
+             }
+             
+             .round {
+                 min-height: auto;
+                 gap: 20px;
+                 width: 100%;
+                 min-width: auto;
+                 flex-direction: row;
+                 flex-wrap: wrap;
+                 justify-content: center;
+             }
+             
+             .match {
+                 width: calc(50% - 20px);
+                 max-width: 280px;
+                 margin: 10px;
+                 min-width: 180px;
+             }
+             
+             .player {
+                 font-size: 1rem;
+                 padding: 8px;
+             }
+             
+             .section-title {
+                 font-size: 1.6rem;
+             }
+             
+             .bracket-section, .match-details-section {
+                 padding: 25px;
+             }
+             
+             .tournament-info {
+                 flex-direction: column;
+                 gap: 15px;
+             }
+             
+             .info-card {
+                 width: 100%;
+             }
+         }
+        
+        /* 小屏手机 (小于576px) */
+         @media (max-width: 576px) {
+             .container {
+                 padding: 10px;
+             }
+             
+             .header {
+                 padding: 20px 0;
+             }
+             
+             .header h1 {
+                 font-size: 2rem;
+             }
+             
+             .header p {
+                 font-size: 1rem;
+             }
+             
+             .bracket-container {
+                 gap: 20px;
+                 padding: 0 10px;
+                 min-height: auto;
+             }
+             
+             .round {
+                 flex-direction: column;
+                 flex-wrap: nowrap;
+                 width: 100%;
+                 min-width: auto;
+             }
+             
+             .match {
+                 width: 100%;
+                 max-width: 280px;
+                 padding: 12px;
+                 margin: 8px auto;
+             }
+             
+             .player {
+                 font-size: 0.9rem;
+                 padding: 6px;
+                 margin: 8px 0;
+             }
+             
+             .section-title {
+                 font-size: 1.4rem;
+             }
+             
+             .bracket-section, .match-details-section {
+                 padding: 20px;
+                 border-radius: 20px;
+             }
+             
+             .round-title {
+                 font-size: 1.2rem;
+                 padding: 8px 20px;
+                 margin-bottom: 20px;
+             }
+             
+             .toggle-container {
+                 flex-direction: column;
+                 gap: 15px;
+             }
+             
+             .toggle-label {
+                 width: 100%;
+                 max-width: 200px;
+             }
+             
+             .click-hint {
+                 font-size: 0.9rem;
+                 min-width: 150px;
+                 min-height: 70px;
+                 padding: 12px 15px;
+                 white-space: nowrap;
+             }
+         }
+        
+        /* 超小屏手机 (小于400px) */
+         @media (max-width: 400px) {
+             .container {
+                 padding: 8px;
+             }
+             
+             .header h1 {
+                 font-size: 1.8rem;
+             }
+             
+             .header p {
+                 font-size: 0.9rem;
+             }
+             
+             .bracket-container {
+                 gap: 15px;
+                 padding: 0 8px;
+             }
+             
+             .match {
+                 max-width: 220px;
+                 padding: 10px;
+                 margin: 6px auto;
+             }
+             
+             .player {
+                 font-size: 0.85rem;
+                 padding: 5px;
+                 margin: 6px 0;
+             }
+             
+             .section-title {
+                 font-size: 1.2rem;
+             }
+             
+             .bracket-section, .match-details-section {
+                 padding: 15px;
+                 border-radius: 15px;
+             }
+             
+             .round-title {
+                 font-size: 1rem;
+                 padding: 6px 15px;
+                 margin-bottom: 15px;
+             }
+             
+             .click-hint {
+                 font-size: 0.8rem;
+                 min-width: 130px;
+                 min-height: 60px;
+                 padding: 8px 10px;
+                 white-space: nowrap;
+             }
+         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>TTT年终总决赛</h1>
+            <h1>🏓 TTT年终总决赛 🏓</h1>
             <p>巅峰对决</p>
             <div class="tournament-info">
                 <div class="info-card">
@@ -800,13 +998,17 @@
             </label>
         </div>
 
+        <!-- 点击提示 -->
+        <div class="click-hint-container">
+            <div class="click-hint">
+                💡 点击比赛查看详细比分
+            </div>
+        </div>
+
         <section class="bracket-section">
             <h2 class="section-title" id="bracket-title">单打</h2>
             <div class="bracket-container" id="bracket">
                
-            </div>
-            <div class="click-hint">
-                💡 点击比赛<br>查看详细比分
             </div>
         </section>
 
@@ -882,34 +1084,18 @@
                 }
             },
             doubles: {
-                quarterFinals: [
-                    { 
-                        id: 'dqf1', 
-                        player1: '陈子涵/谢佳奇', 
-                        player2: '毛嘉盾/王梓豪',
-                        winner: '待定',
-                        type: '五局三胜'
-                    },
-                    { 
-                        id: 'dqf2', 
-                        player1: '倪震坤/王烨伦', 
-                        player2: '孙嘉辰/徐振轩',
-                        winner: '待定',
-                        type: '五局三胜'
-                    }
-                ],
                 semiFinals: [
                     { 
                         id: 'dsf1', 
-                        player1: '待定', 
-                        player2: '待定',
+                        player1: '陈子涵/谢佳奇', 
+                        player2: '毛嘉盾/王梓豪',
                         winner: '待定',
                         type: '七局四胜'
                     },
                     { 
                         id: 'dsf2', 
-                        player1: '待定', 
-                        player2: '待定',
+                        player1: '倪震坤/王烨伦', 
+                        player2: '孙嘉辰/徐振轩',
                         winner: '待定',
                         type: '七局四胜'
                     }
@@ -935,17 +1121,7 @@
             const data = isDoubles ? tournamentData.doubles : tournamentData.singles;
             
             if (isDoubles) {
-                // 双打布局 
-                const quarterFinalRound = document.createElement('div');
-                quarterFinalRound.className = 'round';
-                quarterFinalRound.innerHTML = '<div class="round-title">1/4决赛</div>';
-                
-                const quarter1 = createMatchElement(data.quarterFinals[0], 'quarter');
-                const quarter2 = createMatchElement(data.quarterFinals[1], 'quarter');
-                
-                quarterFinalRound.appendChild(quarter1);
-                quarterFinalRound.appendChild(quarter2);
-
+                // 双打布局 - 只有半决赛和决赛
                 // 半决赛轮
                 const semiFinalRound = document.createElement('div');
                 semiFinalRound.className = 'round';
@@ -978,7 +1154,6 @@
                 `;
                 championRound.appendChild(championElement);
 
-                bracketContainer.appendChild(quarterFinalRound);
                 bracketContainer.appendChild(semiFinalRound);
                 bracketContainer.appendChild(finalRound);
                 bracketContainer.appendChild(championRound);
@@ -1248,5 +1423,4 @@
         });
     </script>
 </body>
-
 </html>
